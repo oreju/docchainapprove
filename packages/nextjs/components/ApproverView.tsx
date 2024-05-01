@@ -1,10 +1,7 @@
-//import { useState } from "react";
+// Approver.jsx
+import TransactionActions from "./TransactionActions.client";
 
 const Approver = () => {
-  //   const [item, setItem] = useState(null);
-  //   const [isApproved, setApproved] = useState(false);
-  //   const [isDeclined, setDeclined] = useState(false);
-  //   const [userInfo, setUserInfo] = useState(null);
   return (
     <>
       <div className="card w-96 neutral-content shadow-md">
@@ -51,15 +48,9 @@ const Approver = () => {
           </div>
         </div>
       </div>
-      <div className="card w-96 neutral-content shadow-md">
-        <div className="card-body">
-          <p>Pending...</p>
-          <div className="card-actions justify-between btn-group">
-            <button className="btn btn-success">Approve</button>
-            <button className="btn btn-ghost">Decline</button>
-          </div>
-        </div>
-      </div>
+
+      {/* Include the Client Component without passing event handlers */}
+      <TransactionActions />
     </>
   );
 };
