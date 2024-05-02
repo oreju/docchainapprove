@@ -14,7 +14,7 @@ const ipfs = ipfsHttpClient({
   });
 //const ipfs = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 //const ipfsnode= await IPFS.create();
-export const PdfUpload = ({ setUrl }) => {
+export const PdfUpload = ({ setUrl, setHash }) => {
     const [pdf, setPdf] = useState({})
     const [pdfPreview, setPdfPreview] = useState('')
     const [loading, setLoading] = useState(false)
@@ -39,6 +39,8 @@ export const PdfUpload = ({ setUrl }) => {
             const url = `https://ipfs.infura.io/ipfs/${added.path}`
             setPdfPreview(url)
             setUrl(url)
+            console.log(added, 'added')
+            setHash(added.path)
             setUploaded(true)
         } catch (err) {
             console.log('Error uploading the file : ', err)
@@ -56,7 +58,6 @@ export const PdfUpload = ({ setUrl }) => {
                                 ✅{' '}
                                 <a
                                     href={pdfPreview}
-                                    s
                                     target='_blank'
                                     rel='noopener noreferrer'
                                 >

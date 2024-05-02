@@ -4,9 +4,10 @@ import { PdfUpload } from './PdfUpload';  // Ensure PdfUpload is correctly impor
 import  factory  from '../utils/factory';  // Ensure factory is correctly imported
 import web3 from '../utils/web3';  // Ensure web3 is correctly imported
 import sha256 from "sha256";
-
+import { uid } from "uid";
 const UserView = () => {
   const [proposalUrl, setProposalUrl] = useState('');
+  const [documentHash, setDocumentHash] = useState('');
   const [file, setFile] = useState("");
   const [amount, setAmount] = useState("");
   const [comment, setComment] = useState("");
@@ -32,8 +33,14 @@ const UserView = () => {
       .send({
         from: accounts[0],
       });
+    console.log(proposalUrl, 'setProposalUrl')
     const tx = transaction.transactionHash;
     console.log("Transaction hash: ", tx);
+    id = uid(24);
+    setId(id);
+    console.log(proposalUrl, 'setProposalUrl')
+    console.log(documentHash, 'documentHash')
+    setHash(tx)
   };
 
   return (
@@ -47,14 +54,19 @@ const UserView = () => {
           </div>
           <div className="text-start">
             <h3 className="font-bold">Proposal Hash:</h3>
-            <span>Auto-generated Hash here</span>
+            <span>{hash}</span>
           </div>
           <div className="text-start">
             <h3 className="font-bold">Proposal Description:</h3>
             <span>Input for proposal description here</span>
           </div>
           <div className="mt-4">
-            <PdfUpload setUrl={setProposalUrl} />
+            <PdfUpload setUrl={setProposalUrl} setHash={setDocumentHash}/>
+          </div>
+          {/* if document hash then show */}
+          <div className="text-start">
+            <h3 className="font-bold">Document Hash:</h3>
+            <span>{documentHash}</span>
           </div>
           <div className="mt-4">
             <button className="btn" onClick={handleCreateTransaction}>

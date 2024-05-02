@@ -1063,6 +1063,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lukeed/csprng@npm:^1.0.0":
+  version: 1.1.0
+  resolution: "@lukeed/csprng@npm:1.1.0"
+  checksum: 926f5f7fc629470ca9a8af355bfcd0271d34535f7be3890f69902432bddc3262029bb5dbe9025542cf6c9883d878692eef2815fc2f3ba5b92e9da1f9eba2e51b
+  languageName: node
+  linkType: hard
+
 "@mapbox/node-pre-gyp@npm:^1.0.5":
   version: 1.0.11
   resolution: "@mapbox/node-pre-gyp@npm:1.0.11"
@@ -6543,9 +6550,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.668":
-  version: 1.4.753
-  resolution: "electron-to-chromium@npm:1.4.753"
-  checksum: e48947b34a50f9af2b7e4e1b4f04c3c441f343fcce875a565f436cc332b9ba432402752145a9320df061548a0c9e9306cd3f2224e4efd507c903998443d783e8
+  version: 1.4.754
+  resolution: "electron-to-chromium@npm:1.4.754"
+  checksum: e4a49f2a4e2d51a659596d31d748280b59cbcd3af2cbdf5cf30f0bdc1fb981c426522470826b153a94ae8e58baea7d2a1c8bd77c6c85839bac2a4efc9ecb7b2e
   languageName: node
   linkType: hard
 
@@ -13175,6 +13182,7 @@ __metadata:
     lint-staged: ^13.0.3
     react-bootstrap: ^2.10.2
     sha256: ^0.2.0
+    uid: ^2.0.2
     viem: ^2.9.29
     web3: ^4.8.0
   languageName: unknown
@@ -14723,6 +14731,15 @@ __metadata:
   version: 1.0.0
   resolution: "uid-promise@npm:1.0.0"
   checksum: 8769e9581a4ae88b2b43225a3f31730d1075935359df44bfd47618e0f7c8a83cd49c127916fa73f62bfaabcc800d2b3f334af9a02615123d4349372326792ede
+  languageName: node
+  linkType: hard
+
+"uid@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "uid@npm:2.0.2"
+  dependencies:
+    "@lukeed/csprng": ^1.0.0
+  checksum: 98aabddcd6fe46f9b331b0378a93ee9cc51474348ada02006df9d10b4abc783ed596748ed9f20d7f6c5ff395dbcd1e764a65a68db6f39a31c95ae85ef13fe979
   languageName: node
   linkType: hard
 
