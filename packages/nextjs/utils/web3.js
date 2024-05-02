@@ -8,7 +8,7 @@ if(typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
 }else {
     // In the server or user is not running metamask
     const provider = new Web3.providers.HttpProvider(
-        'https://eth-sepolia.g.alchemy.com/v2/aqULHaQWTIGVypCwV08e2HZJXZ9BQPyl'
+        ''
     )
     web3 = new Web3(provider)
 }
