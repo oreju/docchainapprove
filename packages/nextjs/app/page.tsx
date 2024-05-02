@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Approver from "~~/components/ApproverView";
+import UserView from "~~/components/UserView";
 import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 
 const Home: NextPage = () => {
@@ -24,6 +25,7 @@ const Home: NextPage = () => {
                   <h2 className="card-title">Proposal to Approve or Deny</h2>
                   <p>Overview of pending approval request </p>
                   <Approver></Approver>
+                  <UserView></UserView>
                 </div>
               </div>
             </div>
