@@ -1,7 +1,7 @@
 # DocChainApprove
 
 ## Introduction
-DocChainApprove is a blockchain-based document approval system that leverages smart contracts for secure and verifiable document handling processes.
+DocChainApprove is a blockchain-based document approval system that leverages smart contracts and InterPlanetary File System for secure and verifiable document handling processes.
 
 ## Features
 - Blockchain integration for immutable document approval.
