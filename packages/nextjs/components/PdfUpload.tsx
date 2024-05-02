@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Form, Button, ProgressBar, Container, Badge } from 'react-bootstrap'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
-//import IPFS from "ipfs";
+
 const projectId = "2UIZMWmPzQ6AiKfmzePxDfGM0U8";
 const projectSecretKey = "78f5e328c7bb8aed7ab4ffface404949";
 const authorization = "Basic " + btoa(projectId + ":" + projectSecretKey);
@@ -12,8 +12,7 @@ const ipfs = ipfsHttpClient({
      authorization,
     },
   });
-//const ipfs = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
-//const ipfsnode= await IPFS.create();
+
 export const PdfUpload = ({ setUrl, setHash }) => {
     const [pdf, setPdf] = useState({})
     const [pdfPreview, setPdfPreview] = useState('')

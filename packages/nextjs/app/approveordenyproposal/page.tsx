@@ -8,7 +8,6 @@ import { useSearchParams } from 'next/navigation'
 const ApproveOrDenyProposal: NextPage = () => {
   const params = useSearchParams();
   const id = params.get('id');
-  console.log(id, 'id');
 
   return (
     <>

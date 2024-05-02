@@ -14,8 +14,6 @@ const Approver = ({hash}) => {
       const transaction = transactionList.filter((transaction) => transaction.id === hash);
 
       setTransactionToApprove(transaction[0]);
-
-      console.log(transactionList, 'transactionList');
     };
     fetchData();
   }, []);
@@ -23,16 +21,11 @@ const Approver = ({hash}) => {
   const handleApproveProposal = async(hash) => {
     try{
     const accounts = await web3.eth.getAccounts();
-    console.log('accounts1', accounts);
 
     // Execute the transaction once accounts are fetched
     const transaction = await factory.methods
       .approveTransaction(hash)
       .send({ from: accounts[0] });
-
-    console.log(transaction.transactionHash, 'Transaction Hash');
-    console.log('Transaction Details:', transaction);
-    console.log("Transaction approved.");
     }
     catch (err){
       console.log(err)
@@ -42,16 +35,9 @@ const Approver = ({hash}) => {
     
   };
 
-  const proposalsList = async() =>{
-    const proposals = await factory.methods
-    .listTransaction()
-    return proposals
-  }
-
   const handleDecline = async(hash) => {
-    try{
+    try {
       const accounts = await web3.eth.getAccounts();
-      console.log('accounts1', accounts);
   
       // Execute the transaction once accounts are fetched
       const transaction = await factory.methods
