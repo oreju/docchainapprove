@@ -26,18 +26,19 @@ const UserView = () => {
     // setCreating(true);
     let salt = "";
     let id = "";
+    id = uid(24);
+    setId(id);
     const accounts = await web3.eth.getAccounts();
     //   const docHash = result[0].hash;
     const transaction = await factory.methods
-      .createTransaction("11", "111111", "default", "333", 222)
+      .createTransaction(id, documentHash, "default", "testing", 222)
       .send({
         from: accounts[0],
       });
     console.log(proposalUrl, 'setProposalUrl')
     const tx = transaction.transactionHash;
     console.log("Transaction hash: ", tx);
-    id = uid(24);
-    setId(id);
+
     console.log(proposalUrl, 'setProposalUrl')
     console.log(documentHash, 'documentHash')
     setHash(tx)
