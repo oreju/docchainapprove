@@ -1,5 +1,7 @@
 // ApproverListView.tsx
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import factory from "../utils/factory";
 
 const statusIcons = {
   approved: (
@@ -27,39 +29,27 @@ const statusIcons = {
   ),
 };
 
-const approvalRequests = [
-  {
-    id: "6464s848s4wdq46q54efd98q46fd41q6fd44q",
-    date: "2024-04-30",
-    userId: "U1001",
-    userName: "John Doe",
-    transactionHash: "0xabc123fdeokefgokrewowkfgowkfg",
-    status: "pending",
-  },
-  {
-    id: "875ds2asd2a8sd2a8sd2a8sd2a8sd2a8sd2a8s",
-    date: "2024-04-29",
-    userId: "U1002",
-    userName: "Jane Smith",
-    transactionHash: "0xdef456ffvbrsdgfgsdggggggeggssd",
-    status: "approved",
-  },
-  {
-    id: "ew65787s7d8s7d8s7d8s7d8s7d8s7d8s7d8sef",
-    date: "2024-04-28",
-    userId: "U1003",
-    userName: "Alice Johnson",
-    transactionHash: "0xghi789ffvbrsdgfgsdgferfwdgssdpi",
-    status: "declined",
-  },
-];
 
 const ApproverList = () => {
   const router = useRouter();
   const changeStatus = (id: string) => {
     console.log("Status changed for transaction ID:", id);
-    router.push("/approveordenyproposal"); // Redirects to the homepage for now
+    router.push(`/approveordenyproposal?id=${id}`); // Redirects to the homepage for now
   };
+
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const transactionList = await factory.methods.listTransaction().call();
+      setTransactions(transactionList);
+      console.log(transactionList, 'transactionList');
+    };
+    fetchData();
+  }, []);
+
+  console.log(transactions, 'transactions');
+
 
   return (
     <div className="container mx-auto p-4">
@@ -67,21 +57,19 @@ const ApproverList = () => {
       <table className="table w-full">
         <thead>
           <tr>
-            <th>Date of Request</th>
-            <th>User ID</th>
-            <th>User Name</th>
-            <th>Transaction Hash</th>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Comment</th>
             <th>Status</th>
             <th>Change Status</th>
           </tr>
         </thead>
         <tbody>
-          {approvalRequests.map(request => (
+          {transactions.map(request => (
             <tr key={request.id}>
-              <td>{request.date}</td>
-              <td>{request.userId}</td>
-              <td>{request.userName}</td>
-              <td>{request.transactionHash}</td>
+              <td>{request.id}</td>
+              <td>{request.amount}</td>
+              <td>{request.comment}</td>
               <td>
                 {["approved", "declined", "pending"].includes(request.status)
                   ? statusIcons[request.status as keyof typeof statusIcons]

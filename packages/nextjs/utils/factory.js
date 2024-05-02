@@ -3,7 +3,7 @@ import DocuChainApprove from '../../hardhat/artifacts/contracts/DocuChainApprove
 
 const instance = new web3.eth.Contract(
     DocuChainApprove.abi,
-    '0x18ef7f2f2d36362fd5e141e13bd1c56de60caff9'
+    '0xec79e3175b63a295fe1df2f2d5c8454a66fabcf6'
 );
 
 export default instance;
