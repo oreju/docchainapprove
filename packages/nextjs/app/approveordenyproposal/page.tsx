@@ -1,9 +1,15 @@
+'use client';
 import Link from "next/link";
 import type { NextPage } from "next";
 import Approver from "~~/components/ApproverView";
 import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
+import { useSearchParams } from 'next/navigation'
 
 const ApproveOrDenyProposal: NextPage = () => {
+  const params = useSearchParams();
+  const id = params.get('id');
+  console.log(id, 'id');
+
   return (
     <>
       <div className="flex items-center flex-col flex-grow pt-5">
@@ -28,8 +34,8 @@ const ApproveOrDenyProposal: NextPage = () => {
               <div className=" justify-center card w-200 bg-neutral text-neutral-content mt-10">
                 <div className="card-body items-center text-center">
                   <h2 className="card-title">Proposal to Approve or Deny</h2>
-                  <p>Overview of pending approval request </p>
-                  <Approver></Approver>
+                  <p>Overview of approval request </p>
+                  <Approver hash={id}></Approver>
                 </div>
               </div>
             </div>

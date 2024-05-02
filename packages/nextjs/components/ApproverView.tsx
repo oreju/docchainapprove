@@ -1,15 +1,33 @@
 // Approver.jsx
-import TransactionActions from "./TransactionActions.client";
+'use client';
+import factory from '../utils/factory';
+import web3 from '../utils/web3';
+import { useEffect, useState } from 'react';
 
-const Approver = () => {
-  const handleApproveProposal = async(transaction) => {
+const Approver = ({hash}) => {
+  const [transactionToApprove, setTransactionToApprove] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const transactionList = await factory.methods.listTransaction().call();
+      // filter the transaction to approve
+      const transaction = transactionList.filter((transaction) => transaction.id === hash);
+
+      setTransactionToApprove(transaction[0]);
+
+      console.log(transactionList, 'transactionList');
+    };
+    fetchData();
+  }, []);
+
+  const handleApproveProposal = async(hash) => {
     try{
     const accounts = await web3.eth.getAccounts();
     console.log('accounts1', accounts);
 
     // Execute the transaction once accounts are fetched
     const transaction = await factory.methods
-      .approveTransaction("_ipfsHash")
+      .approveTransaction(hash)
       .send({ from: accounts[0] });
 
     console.log(transaction.transactionHash, 'Transaction Hash');
@@ -23,6 +41,38 @@ const Approver = () => {
     return 
     
   };
+
+  const proposalsList = async() =>{
+    const proposals = await factory.methods
+    .listTransaction()
+    return proposals
+  }
+
+  const handleDecline = async(hash) => {
+    try{
+      const accounts = await web3.eth.getAccounts();
+      console.log('accounts1', accounts);
+  
+      // Execute the transaction once accounts are fetched
+      const transaction = await factory.methods
+        .declineTransaction(hash)
+        .send({ from: accounts[0] });
+  
+      console.log(transaction.transactionHash, 'Transaction Hash');
+      console.log('Transaction Details:', transaction);
+      console.log("Transaction approved.");
+      }
+      catch (err){
+        console.log(err)
+      }
+  
+      return 
+  };
+
+  const handleOpenImage = () => {
+    window.open(`https://gateway.ipfs.io/ipfs/${transactionToApprove.docHash}`);
+  };
+  
   return (
     <>
       <div className="card w-96 neutral-content shadow-md">
@@ -30,15 +80,15 @@ const Approver = () => {
           <h2 className="card-title">Proposal details</h2>
           <div className="text-start">
             <h3 className="font-bold">Id:</h3>
-            <span>6464s848s4wdq46q54efd98q46fd41q6fd44q</span>
+            <span>{transactionToApprove.id}</span>
           </div>
           <div className="text-start">
             <h3 className="font-bold">Hash:</h3>
-            <span>33f1d21fe6f93db23963a0c7b8e31a97</span>
+            <span>{transactionToApprove.docHash}</span>
           </div>
           <div className="text-start">
             <h3 className="font-bold">Description:</h3>
-            <span>Description of the proposal</span>
+            <span>{transactionToApprove.comment}</span>
           </div>
           <div tabIndex={0} className="collapse collapse-arrow border border-base-300 neutral-content">
             <div className="collapse-title text-sm font-medium">Initiator Details</div>
@@ -49,7 +99,7 @@ const Approver = () => {
             </div>
           </div>
           <div className="mt-4">
-            <button className="btn">
+            <button className="btn" onClick={handleOpenImage}>
               View File
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -70,8 +120,14 @@ const Approver = () => {
         </div>
       </div>
 
-      {/* Include the Client Component without passing event handlers */}
-      <TransactionActions />
+      <div className="card w-96 neutral-content shadow-md">
+        <div className="card-body">
+          <div className="card-actions justify-between btn-group">
+            <button className="btn btn-success" onClick={()=>handleApproveProposal(transactionToApprove.docHash)}>Approve</button>
+            <button className="btn btn-ghost" onClick={()=>handleDecline(transactionToApprove.docHash)}>Decline</button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

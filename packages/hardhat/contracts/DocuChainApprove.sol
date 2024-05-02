@@ -275,46 +275,57 @@ contract DocuChainApprove {
         Transaction storage t = transactionMap[_hash];
         string storage currentApproval = t.currentApprovalRole;
         string storage uptoApproval = t.uptoApprovalRole;
-        uint validationCode = validateTxDuration(_hash);
+        // uint validationCode = validateTxDuration(_hash);
 
-        if(validationCode == 1) {
+        // if(validationCode == 1) {
             // validation code is 1 then tx window is still open for current authority
             // start approval process
 
-            Approval storage a = approvalMap[_hash];
-            User storage u = userMap[msg.sender];
-            a.approvalList.push(u);
+        Approval storage a = approvalMap[_hash];
+        User storage u = userMap[msg.sender];
+        a.approvalList.push(u);
 
-            // increase approval user count
-            u.approveCount = u.approveCount+1;
+        // increase approval user count
+        u.approveCount = u.approveCount+1;
 
-            Notification storage n1 = notificationMap[_hash];
-            if(compareStrings(currentApproval, uptoApproval)) {
-                // if uptoApproval and currentApproval are same then the tx will be completed
-                // change the tx status to completed
-                t.status = "APPROVED";
+        Notification storage n1 = notificationMap[_hash];
+        // if uptoApproval and currentApproval are same then the tx will be completed
+        // change the tx status to completed
+        t.status = "APPROVED";
 
-                n1.title = "Transaction Completed";
-                n1.message = string(abi.encodePacked("Transaction with transaction hash ", _hash, " is completed and approved by all the authorities"));
-                n1.docHash = _hash;
-                n1.status = "APPROVED";
-                notificationList.push(n1);
-            }else {
-                // else tx will be transferred to higher authority for next approval
-                Role storage r = roleMap[currentApproval];
-                string storage approvalName = r.name;
-                t.currentApprovalRole = getNextRole(currentApproval);
+        n1.title = "Transaction Completed";
+        n1.message = string(abi.encodePacked("Transaction with transaction hash ", _hash, " is completed and approved by all the authorities"));
+        n1.docHash = _hash;
+        n1.status = "APPROVED";
+        notificationList.push(n1);
 
-                n1.title = "Transaction Approved";
-                n1.message = string(abi.encodePacked("Transaction with transaction hash ", _hash, " is approved by ", approvalName));
-                n1.docHash = _hash;
-                n1.status = "APPROVED";
-                notificationList.push(n1);
-            }
-            return validationCode;
-        }else {
-            return validationCode;
-        }
+        return 1;
+            // if(compareStrings(currentApproval, uptoApproval)) {
+            //     // if uptoApproval and currentApproval are same then the tx will be completed
+            //     // change the tx status to completed
+            //     t.status = "APPROVED";
+
+            //     n1.title = "Transaction Completed";
+            //     n1.message = string(abi.encodePacked("Transaction with transaction hash ", _hash, " is completed and approved by all the authorities"));
+            //     n1.docHash = _hash;
+            //     n1.status = "APPROVED";
+            //     notificationList.push(n1);
+            // }else {
+            //     // else tx will be transferred to higher authority for next approval
+            //     Role storage r = roleMap[currentApproval];
+            //     string storage approvalName = r.name;
+            //     t.currentApprovalRole = getNextRole(currentApproval);
+
+            //     n1.title = "Transaction Approved";
+            //     n1.message = string(abi.encodePacked("Transaction with transaction hash ", _hash, " is approved by ", approvalName));
+            //     n1.docHash = _hash;
+            //     n1.status = "APPROVED";
+            //     notificationList.push(n1);
+            // }
+            // return validationCode;
+        // }else {
+            // return validationCode;
+        // }
     }
 
     function declineTransaction(string memory _hash) public returns(uint) {
