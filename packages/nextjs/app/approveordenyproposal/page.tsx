@@ -1,10 +1,9 @@
 import Link from "next/link";
 import type { NextPage } from "next";
-import ProposalCard from "~~/components/ProposalCard";
-import UserView from "~~/components/UserView";
+import Approver from "~~/components/ApproverView";
 import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 
-const Home: NextPage = () => {
+const ApproveOrDenyProposal: NextPage = () => {
   return (
     <>
       <div className="flex items-center flex-col flex-grow pt-5">
@@ -12,10 +11,9 @@ const Home: NextPage = () => {
           <div className=" text-right">
             <RainbowKitCustomConnectButton />
           </div>
-          <div className="skeleton text-center mt-2">Approver Superpower</div>
-          <div className="text-center mt-5 mb-5">
-            <Link href="/approverlistproposals" className="btn btn-neutral">
-              View Proposals list for Approver X
+          <div className="text-left">
+            <Link href="/" className="btn btn-neutral">
+              Home
             </Link>
           </div>
           <div className="flex justify-center">
@@ -31,8 +29,7 @@ const Home: NextPage = () => {
                 <div className="card-body items-center text-center">
                   <h2 className="card-title">Proposal to Approve or Deny</h2>
                   <p>Overview of pending approval request </p>
-                  <ProposalCard></ProposalCard>
-                  <UserView></UserView>
+                  <Approver></Approver>
                 </div>
               </div>
             </div>
@@ -43,4 +40,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default ApproveOrDenyProposal;
