@@ -2,6 +2,27 @@
 import TransactionActions from "./TransactionActions.client";
 
 const Approver = () => {
+  const handleApproveProposal = async(transaction) => {
+    try{
+    const accounts = await web3.eth.getAccounts();
+    console.log('accounts1', accounts);
+
+    // Execute the transaction once accounts are fetched
+    const transaction = await factory.methods
+      .approveTransaction("_ipfsHash")
+      .send({ from: accounts[0] });
+
+    console.log(transaction.transactionHash, 'Transaction Hash');
+    console.log('Transaction Details:', transaction);
+    console.log("Transaction approved.");
+    }
+    catch (err){
+      console.log(err)
+    }
+
+    return 
+    
+  };
   return (
     <>
       <div className="card w-96 neutral-content shadow-md">
