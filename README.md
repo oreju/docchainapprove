@@ -18,7 +18,15 @@ DocChainApprove is a blockchain-based document approval system that leverages sm
 1. Clone the repository to your local machine.
 2. Copy `.env.example` to `.env`.
 3. Add your Alchemy API Key (`ALCHEMY_API_KEY`) and your wallet's private key (`DEPLOYER_PRIVATE_KEY`) to the `.env` file.
-
+4. Install dependencies
+   ```bash
+   yarn install
+   ```
+5. Run application
+   ```bash
+   yarn start
+   ```
+   
 ### Deploying the Smart Contract
 1. Navigate to the Hardhat directory:
    ```bash
