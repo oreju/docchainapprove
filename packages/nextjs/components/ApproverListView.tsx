@@ -33,7 +33,6 @@ const statusIcons = {
 const ApproverList = () => {
   const router = useRouter();
   const changeStatus = (id: string) => {
-    console.log("Status changed for transaction ID:", id);
     router.push(`/approveordenyproposal?id=${id}`); // Redirects to the homepage for now
   };
 

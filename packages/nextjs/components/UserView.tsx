@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { PdfUpload } from './PdfUpload';  // Ensure PdfUpload is correctly imported
 import  factory  from '../utils/factory';  // Ensure factory is correctly imported
 import web3 from '../utils/web3';  // Ensure web3 is correctly imported
-import sha256 from "sha256";
 import { uid } from "uid";
 const UserView = () => {
   const [proposalUrl, setProposalUrl] = useState('');
@@ -23,24 +22,16 @@ const UserView = () => {
       alert('Please upload the PDF and wait for it to finish uploading before submitting the proposal.');
       return;
     }
-    // setCreating(true);
-    let salt = "";
     let id = "";
     id = uid(24);
     setId(id);
     const accounts = await web3.eth.getAccounts();
-    //   const docHash = result[0].hash;
     const transaction = await factory.methods
       .createTransaction(id, documentHash, "default", "testing", 222)
       .send({
         from: accounts[0],
       });
-    console.log(proposalUrl, 'setProposalUrl')
     const tx = transaction.transactionHash;
-    console.log("Transaction hash: ", tx);
-
-    console.log(proposalUrl, 'setProposalUrl')
-    console.log(documentHash, 'documentHash')
     setHash(tx)
   };
 

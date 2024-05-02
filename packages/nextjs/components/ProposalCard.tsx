@@ -21,9 +21,6 @@ const ProposalCard = () => {
     fetchData();
   }, []);
 
-  console.log(transactions, 'transactions');
-
-
   return (
     <div className="card w-96 bg-neutral shadow-md">
       <div className="card-body">
