@@ -8,11 +8,12 @@ const Approver = ({hash}) => {
   const [transactionToApprove, setTransactionToApprove] = useState([]);
 
   useEffect(() => {
+    
     const fetchData = async () => {
       const transactionList = await factory.methods.listTransaction().call();
       // filter the transaction to approve
       const transaction = transactionList.filter((transaction) => transaction.id === hash);
-
+    console.log(transaction[0])
       setTransactionToApprove(transaction[0]);
 
       console.log(transactionList, 'transactionList');
@@ -22,6 +23,7 @@ const Approver = ({hash}) => {
 
   const handleApproveProposal = async(hash) => {
     try{
+    console.log("TRANSACTION TO ACCEPT PROPOSAL:"+hash)
     const accounts = await web3.eth.getAccounts();
     console.log('accounts1', accounts);
 
@@ -123,8 +125,9 @@ const Approver = ({hash}) => {
       <div className="card w-96 neutral-content shadow-md">
         <div className="card-body">
           <div className="card-actions justify-between btn-group">
-            <button className="btn btn-success" onClick={()=>handleApproveProposal(transactionToApprove.docHash)}>Approve</button>
-            <button className="btn btn-ghost" onClick={()=>handleDecline(transactionToApprove.docHash)}>Decline</button>
+            
+            <button className="btn btn-success" onClick={()=>handleApproveProposal(transactionToApprove[1])}>Approve</button>
+            <button className="btn btn-ghost" onClick={()=>handleDecline(transactionToApprove[1])}>Decline</button>
           </div>
         </div>
       </div>
